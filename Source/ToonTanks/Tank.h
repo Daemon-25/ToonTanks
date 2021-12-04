@@ -20,12 +20,20 @@ class TOONTANKS_API ATank : public ABasePawn
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, category = "Tank Properties", meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* Camera;
 		UPROPERTY(EditAnywhere, category = "Movement")
-		float Speed = 1000.f;
+		float Speed = 800.f;
+		UPROPERTY(EditAnywhere, category = "Movement")
+		float TurnSpeed = 100.f;
 
 		void Move(float Value);
+		void Turn(float Value);
+
+		APlayerController* Controller;
 
 	public:
 		ATank();
+
+		// Called when the game starts or when spawned
+		virtual void BeginPlay() override;
 
 		// Called to bind functionality to input
 		virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

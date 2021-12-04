@@ -15,17 +15,31 @@ ATank::ATank(){
     Camera->SetupAttachment(SpringArm);
 }
 
+void ATank::BeginPlay(){
+    Super::BeginPlay();
+
+    Controller = Cast<APlayerController>(APawn::GetController());
+
+}
+
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent){
     Super::SetupPlayerInputComponent(PlayerInputComponent);
 
     PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
-}
+    PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
 
+    Controller->GetHitResultUnderCursor()
+}//
 void ATank::Move(float Value){
-    UE_LOG(LogTemp, Warning, TEXT("%f"), Value);
-
     FVector DeltaLocation(0.f, 0.f, 0.f);
     DeltaLocation.X = Value*Speed*UGameplayStatics::GetWorldDeltaSeconds(this);
 
-	AddActorLocalOffset(DeltaLocation);
+	AddActorLocalOffset(DeltaLocation, true);
+}
+
+void ATank::Turn(float Value){
+    FRotator DeltaRotation(0.f);
+    DeltaRotation.Yaw = Value*TurnSpeed*UGameplayStatics::GetWorldDeltaSeconds(this);
+
+	AddActorLocalRotation(DeltaRotation, true);
 }

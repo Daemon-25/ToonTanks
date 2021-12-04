@@ -12,7 +12,13 @@ void ATower::BeginPlay(){
 
     Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
 
-    GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &ATower::CheckFireCondition, FireRate, true);
+    GetWorldTimerManager().SetTimer(
+        FireRateTimerHandle, 
+        this, 
+        &ATower::CheckFireCondition, 
+        FireRate, 
+        true
+    );
 }
 
 void ATower::Tick(float DeltaTime){

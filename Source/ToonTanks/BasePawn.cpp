@@ -4,6 +4,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -24,8 +25,20 @@ ABasePawn::ABasePawn()
 	ProjectileSpawnPoint->SetupAttachment(TurrentMesh);
 }
 
-// Called every frame
-void ABasePawn::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+void ABasePawn::Rotate(FVector Target){
+    FVector ToTarget = Target - TurrentMesh->GetComponentLocation();
+	FRotator TargetRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
+	TurrentMesh->SetWorldRotation(TargetRotation);
+}
+
+void ABasePawn::Fire(){
+	DrawDebugSphere(
+		GetWorld(),
+		ProjectileSpawnPoint->GetComponentLocation(),
+		25.f,
+		12,
+		FColor::Red,
+		false,
+		3.f
+	);
 }

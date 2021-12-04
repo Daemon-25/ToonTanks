@@ -19,6 +19,8 @@ class TOONTANKS_API ATank : public ABasePawn
 		class USpringArmComponent* SpringArm;
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, category = "Tank Properties", meta = (AllowPrivateAccess = "true"))
 		class UCameraComponent* Camera;
+		UPROPERTY(EditAnywhere, category = "Movement")
+		float Speed = 1000.f;
 
 		void Move(float Value);
 

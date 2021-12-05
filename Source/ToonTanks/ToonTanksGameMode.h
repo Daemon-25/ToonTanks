@@ -22,5 +22,6 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 
 	public:
 		void ActorDied(AActor* DeadActor);
+		class AToonTanksPlayerController* Controller;
 
 };

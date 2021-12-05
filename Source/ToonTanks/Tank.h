@@ -40,4 +40,10 @@ class TOONTANKS_API ATank : public ABasePawn
 
 		// Called every frame
 		virtual void Tick(float DeltaTime) override;
+
+		void HandleDestruction();
+
+		APlayerController* GetTankPlayerController() const {
+			return Controller;
+		}
 };

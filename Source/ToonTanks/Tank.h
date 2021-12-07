@@ -46,4 +46,5 @@ class TOONTANKS_API ATank : public ABasePawn
 		APlayerController* GetTankPlayerController() const {
 			return Controller;
 		}
+		bool bAlive = true;
 };

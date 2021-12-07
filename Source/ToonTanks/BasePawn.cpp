@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Projectile.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -37,5 +38,12 @@ void ABasePawn::Fire(){
 }
 
 void ABasePawn::HandleDestruction(){
-	
+	if(DeathSound)
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+
+	if(DeathShakeClass)
+		GetWorld()->GetFirstPlayerController()->ClientPlayCameraShake(DeathShakeClass);
+
+	if(!DeathExplosion) return;
+	UGameplayStatics::SpawnEmitterAtLocation(this, DeathExplosion, GetActorLocation(), GetActorRotation());
 }

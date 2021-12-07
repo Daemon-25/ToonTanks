@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 ATank::ATank(){
     SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
@@ -63,4 +64,6 @@ void ATank::HandleDestruction(){
     
     SetActorHiddenInGame(true);
     SetActorTickEnabled(false);
+
+    bAlive = false;
 }
